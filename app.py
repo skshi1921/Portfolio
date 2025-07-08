@@ -88,12 +88,16 @@ Message: {message}
 # Send confirmation email to user
 def send_user_confirmation_email(user_email, user_name):
     body = f"""
-Hello {user_name},
+Hi {user_name},
 
-Thank you for contacting us. We have received your message and will get back to you soon.
+Thank you for reaching out to me through my portfolio website! 🙌
 
-Best regards,
-Shivam (Portfolio Website)
+I've received your message and will get back to you as soon as possible. In the meantime, feel free to explore more of my work on the site.
+
+Have a great day ahead! 🌟
+
+Warm regards,
+Shubham
 """
     msg = Message(subject="Thank you for contacting us!",
                   sender=app.config['MAIL_USERNAME'],
