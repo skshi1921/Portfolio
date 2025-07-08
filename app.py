@@ -104,11 +104,14 @@ Hi {user_name},
 
 Thank you for reaching out to me through my portfolio website! 🙌
 
-Here's what we received:
-Service: {service}
-Message: {message}
+I've received your message and will get back to you as soon as possible. In the meantime, feel free to explore more of my work on the site.
 
-I'll get back to you as soon as possible.
+Here are the details you submitted:
+
+Service: **{service}**
+Email: **{user_email}**
+Message: **{message}**
+Mobile Number: **(shared if provided)**
 
 Have a great day ahead! 🌟
 
