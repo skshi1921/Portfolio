@@ -99,28 +99,44 @@ Country: {country}
     mail.send(msg)
 
 def send_user_confirmation_email(user_email, user_name, service, message, mobile):
-    body = f"""
-Hi {user_name},
+    html_body = f"""
+<html>
+  <body style="font-family: Arial, sans-serif; color: #333;">
+    <p>Hi {user_name},</p>
 
-Thank you for reaching out to me through my portfolio website! 🙌
+    <p>Thank you for reaching out to me through my portfolio website! 🙌</p>
 
-I've received your message and will get back to you as soon as possible. In the meantime, feel free to explore more of my work on the site.
+    <p>I've received your message and will get back to you as soon as possible. In the meantime, feel free to explore more of my work on the site.</p>
 
-Here are the details you submitted:
+    <p><strong>Here are the details you submitted:</strong></p>
+    <table cellpadding="8" style="border-collapse: collapse;">
+      <tr>
+        <td><strong style='color:#4a6cf7;'>Service:</strong></td>
+        <td>{service}</td>
+      </tr>
+      <tr>
+        <td><strong style='color:#4a6cf7;'>Email:</strong></td>
+        <td>{user_email}</td>
+      </tr>
+      <tr>
+        <td><strong style='color:#4a6cf7;'>Mobile Number:</strong></td>
+        <td>{mobile or 'Not Provided'}</td>
+      </tr>
+      <tr>
+        <td><strong style='color:#4a6cf7;'>Message:</strong></td>
+        <td>{message}</td>
+      </tr>
+    </table>
 
-Service: **{service}**
-Email: **{user_email}**
-Mobile Number: **{mobile or 'Not Provided'}**
-Message: **{message}**
+    <p>Have a great day ahead! 🌟</p>
 
-Have a great day ahead! 🌟
-
-Warm regards,
-Shubham Kumar
+    <p><strong>Warm regards,<br>Shubham Kumar</strong></p>
+  </body>
+</html>
 """
     msg = Message(subject="Thanks for getting in touch!",
                   recipients=[user_email],
-                  body=body)
+                  html=html_body)
     mail.send(msg)
 
 # ---------- DAILY SUMMARY ----------
