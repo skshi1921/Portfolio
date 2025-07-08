@@ -98,7 +98,7 @@ Country: {country}
                   body=body)
     mail.send(msg)
 
-def send_user_confirmation_email(user_email, user_name, service, message):
+def send_user_confirmation_email(user_email, user_name, service, message, mobile):
     body = f"""
 Hi {user_name},
 
@@ -110,8 +110,8 @@ Here are the details you submitted:
 
 Service: **{service}**
 Email: **{user_email}**
+Mobile Number: **{mobile or 'Not Provided'}**
 Message: **{message}**
-Mobile Number: **(shared if provided)**
 
 Have a great day ahead! 🌟
 
@@ -172,7 +172,7 @@ def contact():
 
         save_contact_to_sheet(name, email, service, mobile_number, message)
         send_contact_email(name, email, service, mobile_number, message)
-        send_user_confirmation_email(email, name, service, message)
+        send_user_confirmation_email(email, name, service, message, mobile_number)
 
         return jsonify({
             'status': 'success',
