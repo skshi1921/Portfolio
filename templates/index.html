@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Set initial background color based on saved theme -->
+    <script>
+        document.documentElement.style.backgroundColor = 
+            window.localStorage.getItem('theme') === 'light' ? '#ffffff' : '#0f0f1a';
+    </script>
+    <title>Shubham Kumar - AI/ML Portfolio</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Particles.js for background effects -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Mobile Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">ShubCodeX</div>
+            <div class="sidebar-close"><i class="fas fa-times"></i></div>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="#hero" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="/projects">All Projects</a></li>
+            <li><a href="#ongoing-projects">Ongoing</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="logo">ShubCodeX</div>
+                <ul class="nav-links">
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#resume">Resume</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="/projects">All Projects</a></li>
+                    <li><a href="#ongoing-projects">Ongoing</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider">
+                            <div class="icons">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="hero-title">Hello, I'm <span>Shubham Kumar</span></h1>
+                    <p class="hero-subtitle">AI/ML Enthusiast & Developer specializing in building intelligent solutions and predictive models with a passion for creating impactful technology.</p>
+                    <div class="hero-btns">
+                        <a href="#projects" class="btn btn-primary" id="explore-work-btn">Explore My Work</a>
+                        <a href="../static/Shubham_Resume.pdf" class="btn btn-outline download-cv-btn" download="Shubham_Resume.pdf">Download CV</a>
+                    </div>
+                </div>
+                <div class="hero-image" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+                    <div class="hero-image-container tilt">
+                        <div class="hero-image-bg"></div>
+                        <img src="../static/images/your_profile_photo.jpg" alt="Shubham Kumar" class="tilt-inner">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="1000">
+                <h2>About <span>Me</span></h2>
+                <p>Learn more about my background, skills, and what drives me in the world of AI and Machine Learning.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <h3>AI/ML Developer & Enthusiast</h3>
+                    <p>I am a passionate AI/ML student with a strong foundation in developing predictive models and building user-friendly interfaces. My journey in the field of artificial intelligence began when I discovered the power of data-driven decision making.</p>
+                    <p>Currently, I’m focused on building machine learning solutions that solve real-world problems. I enjoy the entire pipeline — from data collection and preprocessing to model training, evaluation, and deployment.</p>
+                    <p>I have hands-on experience with frameworks and tools such as Flask, FastAPI, Streamlit, and Gradio for developing AI-powered applications. On the machine learning side, I work extensively with scikit-learn, TensorFlow, Keras, and PyTorch.</p>
+                    <p>In addition to core AI/ML, I’m also working on IoT and TinyML projects, exploring how machine learning can be embedded into low-power edge devices using platforms like TensorFlow Lite for Microcontrollers, Edge Impulse, and ESP32 boards.</p>
+                    <div class="skills">
+                        <h4>Technical Skills</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+                            <span class="skill-tag"><i class="fas fa-brain"></i> TF & TFLite</span>
+                            <span class="skill-tag"><i class="fas fa-fire"></i> PyTorch</span>
+                            <span class="skill-tag"><i class="fas fa-cogs"></i> Scikit-Learn</span>
+                            <span class="skill-tag"><i class="fas fa-flask"></i> Flask</span>
+                            <span class="skill-tag"><i class="fas fa-database"></i> SQL</span>
+                            <span class="skill-tag"><i class="fas fa-chart-bar"></i> Data Analysis</span>
+                            <span class="skill-tag"><i class="fas fa-comment-dots"></i> NLP</span>
+                            <span class="skill-tag"><i class="fas fa-network-wired"></i> Deep Learning</span>
+                            <span class="skill-tag"><i class="fas fa-eye"></i> Computer Vision</span>
+                            <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+                            <span class="skill-tag"><i class="fa-brands fa-html5"></i> HTML</span>
+                            <span class="skill-tag"><i class="fa-brands fa-css3-alt"></i> CSS</span>
+                            <span class="skill-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+                            <span class="skill-tag"><i class="fa-brands fa-react"></i> ReactJS</span>
+                            <span class="skill-tag"><i class="fa-brands fa-edge"></i> Edge Impulse</span>
+                            <span class="skill-tag"><i class="fa-solid fa-eye"></i> OpenCV</span>
+                            <span class="skill-tag"><i class="fa-brands fa-connectdevelop"></i> ONNX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="1000">
+                <h2>My <span>Resume</span></h2>
+                <p>A summary of my education, experience, and achievements in the field of AI and machine learning.</p>
+            </div>
+            <div class="resume-content">
+                <div class="education" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
+                    <h3>Education</h3>
+                    <div class="resume-item">
+                        <span class="resume-date">2024 - 2025</span>
+                        <h3>Minor in Artificial Intelligence</h3>
+                        <h4>Indian Institute of Technology, Ropar</h4>
+                        <p>Completed a focused academic program in AI covering deep learning, computer vision, and NLP. Emphasized practical implementation of intelligent systems using Python, TensorFlow, and PyTorch. Developed mini-projects that applied neural network techniques to real-world datasets.</p>
+                    </div>
+                    <div class="resume-item">
+                        <span class="resume-date">2020 - 2024</span>
+                        <h3>Bachelor's in Physics</h3>
+                        <h4>BNMU</h4>
+                        <p>Graduated with a strong foundation in analytical thinking, mathematics, and computational methods. Studied classical mechanics, quantum physics, and numerical simulations, which built the problem-solving skills that now support a transition into data science and AI.</p>
+                    </div>
+                </div>
+                <div class="experience" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <h3>Experience</h3>
+                    <div class="resume-item">
+                        <span class="resume-date">2025 - Present</span>
+                        <h3>IoT & TinyML Developer</h3>
+                        <h4>Indian Institute of Technology, Ropar</h4>
+                        <p>Designing intelligent edge solutions using IoT and TinyML with microcontrollers like ESP32. Projects involve real-time gesture recognition, audio classification, and environmental monitoring using TensorFlow Lite Micro and Edge Impulse for on-device processing.</p>
+                    </div>
+                    <div class="resume-item">
+                        <span class="resume-date">Summer 2025</span>
+                        <h3>AI Developer Intern</h3>
+                        <h4>Elevate Lab</h4>
+                        <p>Developed end-to-end ML pipelines solving real-world problems in computer vision and NLP. Contributed to model optimization, evaluation, and lightweight deployment, collaborating with senior AI engineers on smart, real-time, and scalable AI systems.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="download-cv" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                <a href="../static/Shubham_Resume.pdf" class="btn download-resume-btn" download="Shubham_Resume.pdf">Download Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="1000">
+                <h2>My <span>Projects</span></h2>
+                <p>Explore some of my recent work in AI/ML development and implementation.</p>
+            </div>
+            <div class="projects-grid" id="main-projects-grid">
+                <!-- Projects will be dynamically loaded from projectsData.js -->
+            </div>
+            <div class="view-all-projects" data-aos="fade-up" data-aos-duration="1000" style="text-align: center; margin-top: 40px;">
+                <a href="/projects" class="btn">
+                    View All Projects <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ongoing Projects Section -->
+    <section id="ongoing-projects">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="1000">
+                <h2>Ongoing <span>Projects</span></h2>
+                <p>Current research and development initiatives I'm actively working on.</p>
+            </div>
+            <div class="ongoing-projects-container">
+                <!-- Ongoing Project 1 -->
+                <div class="ongoing-project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="ongoing-project-header">
+                        <div class="ongoing-project-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="ongoing-project-status">
+                            <span class="status-badge">In Progress</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 65%;"></div>
+                            </div>
+                            <span class="progress-text">65% Complete</span>
+                        </div>
+                    </div>
+                    <h3 class="ongoing-project-title">Generative AI for Healthcare</h3>
+                    <p class="ongoing-project-description">Developing a generative AI system for synthesizing medical images to improve diagnostic accuracy and training for medical professionals.</p>
+                    <div class="ongoing-project-tech">
+                        <span class="tech-tag">GANs</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Medical Imaging</span>
+                    </div>
+                    <div class="ongoing-project-timeline">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Expected completion: Q4 2025</span>
+                    </div>
+                </div>
+
+                <!-- Ongoing Project 2 -->
+                <div class="ongoing-project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="ongoing-project-header">
+                        <div class="ongoing-project-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="ongoing-project-status">
+                            <span class="status-badge">Research Phase</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 30%;"></div>
+                            </div>
+                            <span class="progress-text">30% Complete</span>
+                        </div>
+                    </div>
+                    <h3 class="ongoing-project-title">Multilingual NLP Framework</h3>
+                    <p class="ongoing-project-description">Building a comprehensive NLP framework that supports multiple Indian languages for sentiment analysis and text classification.</p>
+                    <div class="ongoing-project-tech">
+                        <span class="tech-tag">Transformers</span>
+                        <span class="tech-tag">BERT</span>
+                        <span class="tech-tag">Hugging Face</span>
+                    </div>
+                    <div class="ongoing-project-timeline">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Expected completion: Q3 2025</span>
+                    </div>
+                </div>
+
+                <!-- Ongoing Project 3 -->
+                <div class="ongoing-project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                    <div class="ongoing-project-header">
+                        <div class="ongoing-project-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="ongoing-project-status">
+                            <span class="status-badge">Development</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 45%;"></div>
+                            </div>
+                            <span class="progress-text">45% Complete</span>
+                        </div>
+                    </div>
+                    <h3 class="ongoing-project-title">Financial Market Predictor</h3>
+                    <p class="ongoing-project-description">Creating an advanced time-series forecasting system using deep learning to predict market trends and optimize investment strategies.</p>
+                    <div class="ongoing-project-tech">
+                        <span class="tech-tag">LSTM</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Time Series</span>
+                    </div>
+                    <div class="ongoing-project-timeline">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Expected completion: Q4 2025</span>
+                    </div>
+                </div>
+                
+                <!-- Ongoing Project 4 -->
+                <div class="ongoing-project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="ongoing-project-header">
+                        <div class="ongoing-project-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <div class="ongoing-project-status">
+                            <span class="status-badge">Early Stage</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 15%;"></div>
+                            </div>
+                            <span class="progress-text">15% Complete</span>
+                        </div>
+                    </div>
+                    <h3 class="ongoing-project-title">Edge AI Optimization</h3>
+                    <p class="ongoing-project-description">Developing techniques to optimize deep learning models for deployment on edge devices with limited computational resources.</p>
+                    <div class="ongoing-project-tech">
+                        <span class="tech-tag">Model Compression</span>
+                        <span class="tech-tag">TensorFlow Lite</span>
+                        <span class="tech-tag">Edge Computing</span>
+                    </div>
+                    <div class="ongoing-project-timeline">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Expected completion: Q1 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (moved below projects) -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="1000">
+                <h2>My <span>Services</span></h2>
+                <p>Expert AI/ML solutions tailored to meet your business needs and drive innovation.</p>
+            </div>
+            <div class="services-container">
+                <!-- Service 1 -->
+                <div class="service-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="service-title">AI Model Development</h3>
+                    <p class="service-description">Designed custom ML and Deep Learning solutions using predictive analytics, neural networks, and pattern recognition for business problems.</p>
+                    <div class="service-features">
+                        <div class="service-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Predictive Analytics & Classification</span>
+                        </div>
+                        <div class="service-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Computer Vision & NLP</span>
+                        </div>
+                        <div class="service-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Time Series & Regression Models</span>
+                        </div>
+                    </div>
+                    <div class="service-price" onclick="scrollToContactWithService('AI Model Development')">
+                        <span>Starting at $750</span>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="service-title">AI Web Applications</h3>
+                    <p class="service-description">Interactive AI-powered dashboards and tools using Flask
+User-friendly web interfaces to make your AI models accessible and actionable.</p>
+                    <div class="service-features">
+                        <div class="service-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Interactive Dashboards</span>
+                        </div>
+                        <div class="service-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>API Development</span>
+                        </div>
+                        <div class="service-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Responsive Design</span>
+                        </div>
+                    </div>
+                    <div class="service-price" onclick="scrollToContactWithService('AI Web Applications')">
+                        <span>Starting at $550</span>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fa-brands fa-wordpress-simple"></i>
+                    </div>
+                    <h3 class="service-title">WordPress Website</h3>
+                    <p class="service-description">Modern websites built with WordPress + Elementor
+Fast, responsive, and SEO-optimized sites perfect for businesses, blogs, and landing pages.</p>
+                    <div class="service-features">
+                        <div class="service-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Custom WordPress Design</span>
+                        </div>
+                        <div class="service-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Elementor Page Builder</span>
+                        </div>
+                        <div class="service-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Mobile & SEO Optimized</span>
+                        </div>
+                    </div>
+                    <div class="service-price" onclick="scrollToContactWithService('WordPress Website')">
+                        <span>Starting at $300</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="1000">
+                <h2>Contact <span>Me</span></h2>
+                <p>Inquire about my services or get in touch for collaborations and opportunities!</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
+                    <h3>Let's Connect</h3>
+                    <p>Interested in my services? Select a service below and send me a message. I'm excited to discuss how I can help with your AI/ML needs.</p>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@mobicbuy.com</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Bangalore, India</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/ShubhamAIML" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/shubham-kumar-016b6816b/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.kaggle.com/shubham1921" target="_blank"><i class="fab fa-kaggle"></i></a>
+                        <a href="https://x.com/bgskshivam" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <form id="contactForm" method="POST" action="/contact" enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Select Service</label>
+                            <select id="service" name="service" class="form-control" required onchange="toggleMobileNumber(this.value)">
+                                <option value="" disabled selected>Choose a service...</option>
+                                <option value="None">None</option>
+                                <option value="AI Model Development">AI Model Development</option>
+                                <option value="AI Web Applications">AI Web Applications</option>
+                                <option value="WordPress Website Design">WordPress Website</option>
+                                <option value="Other">Other (Please specify)</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="mobileNumberGroup" style="display:none;">
+                            <label for="mobileNumber">Mobile Number (Required for service purchase)</label>
+                            <input type="tel" id="mobileNumber" name="mobileNumber" class="form-control" pattern="\+?\d{10,15}" placeholder="+XX XXXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" class="form-control" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Success Message Container -->
+        <div id="successMessage" class="success-message" style="display: none;">
+            <div class="success-content" data-aos="zoom-in" data-aos-duration="800">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Message Sent Successfully!</h3>
+                <p>Thank you for reaching out. I'll get back to you soon!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">ShubCodeX</div>
+                <p>Specialized in AI/ML solutions that drive innovation and solve real-world problems.</p>
+                <div class="social-links">
+                    <a href="https://github.com/ShubhamAIML" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/shubham-kumar-016b6816b/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.kaggle.com/shubham1921" target="_blank"><i class="fab fa-kaggle"></i></a>
+                    <a href="https://x.com/bgskshivam" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2025 Shubham Kumar. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Page Transition Element -->
+    <div class="page-transition"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../static/js/projectsData.js"></script>
+    <script src="../static/js/scripts.js"></script>
+</body>
+</html>

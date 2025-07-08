@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        document.documentElement.style.backgroundColor = 
+            window.localStorage.getItem('theme') === 'light' ? '#ffffff' : '#0f0f1a';
+    </script>
+    <title>All Projects - Shubham Kumar</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Particles.js for background effects -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Mobile Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">ShubCodeX</div>
+            <div class="sidebar-close"><i class="fas fa-times"></i></div>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#resume">Resume</a></li>
+            <li><a href="/#projects">Projects</a></li>
+            <li><a href="/projects" class="active">All Projects</a></li>
+            <li><a href="/#ongoing-projects">Ongoing</a></li>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#contact">Contact</a></li>
+        </ul>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="logo">ShubCodeX</div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/#resume">Resume</a></li>
+                    <li><a href="/#projects">Projects</a></li>
+                    <li><a href="/projects" class="active">All Projects</a></li>
+                    <li><a href="/#ongoing-projects">Ongoing</a></li>
+                    <li><a href="/#services">Services</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider">
+                            <div class="icons">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- All Projects Section -->
+    <section id="all-projects">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="1000">
+                <h2>All <span>Projects</span></h2>
+                <p>A comprehensive collection of my AI/ML projects and implementations.</p>
+            </div>
+            
+            <!-- Project Categories -->
+            <div class="project-categories" data-aos="fade-up" data-aos-duration="1000">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="machine-learning">Machine Learning</button>
+                <button class="category-btn" data-category="deep-learning">Deep Learning</button>
+                <button class="category-btn" data-category="nlp">NLP</button>
+                <button class="category-btn" data-category="computer-vision">Computer Vision</button>
+                <button class="category-btn" data-category="web-app">Web Apps</button>
+            </div>
+            
+            <div class="projects-grid" id="all-projects-grid">
+                <!-- Projects will be dynamically loaded from projectsData.js -->
+            </div>
+            
+            <div class="back-to-home" data-aos="fade-up" data-aos-duration="1000">
+                <a href="/" class="btn">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">ShubCodeX</div>
+                <p>Specialized in AI/ML solutions that drive innovation and solve real-world problems.</p>
+                <div class="social-links">
+                    <a href="https://github.com/shubhamkumar" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/shubhamkumar" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://kaggle.com/shubhamkumar" target="_blank"><i class="fab fa-kaggle"></i></a>
+                    <a href="https://twitter.com/shubhamkumar" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Shubham Kumar. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Page Transition Element -->
+    <div class="page-transition"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../static/js/projectsData.js"></script>
+    <script src="../static/js/scripts.js"></script>
+</body>
+</html>
