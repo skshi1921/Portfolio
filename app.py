@@ -98,13 +98,17 @@ Country: {country}
                   body=body)
     mail.send(msg)
 
-def send_user_confirmation_email(user_email, user_name):
+def send_user_confirmation_email(user_email, user_name, service, message):
     body = f"""
 Hi {user_name},
 
 Thank you for reaching out to me through my portfolio website! 🙌
 
-I've received your message and will get back to you as soon as possible. In the meantime, feel free to explore more of my work on the site.
+Here's what we received:
+Service: {service}
+Message: {message}
+
+I'll get back to you as soon as possible.
 
 Have a great day ahead! 🌟
 
@@ -165,7 +169,7 @@ def contact():
 
         save_contact_to_sheet(name, email, service, mobile_number, message)
         send_contact_email(name, email, service, mobile_number, message)
-        send_user_confirmation_email(email, name)
+        send_user_confirmation_email(email, name, service, message)
 
         return jsonify({
             'status': 'success',
