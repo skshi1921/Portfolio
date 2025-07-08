@@ -21,6 +21,7 @@ app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USER')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASS')
+app.config['MAIL_DEFAULT_SENDER'] = ('Shubham Kumar', app.config['MAIL_USERNAME'])
 
 mail = Mail(app)
 
@@ -60,13 +61,13 @@ def get_geo_info(ip):
 # ---------- CONTACT MANAGEMENT ----------
 def save_contact_to_sheet(name, email, service, mobile, message):
     sheet = get_sheet(CONTACT_SHEET_ID)
-    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    ip = request.headers.get('X-Forwarded-For', '').split(',')[0].strip() or request.remote_addr
     city, country = get_geo_info(ip)
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     sheet.append_row([timestamp, name, email, service, mobile, message, ip, city, country, "Yes"])
 
 def send_contact_email(name, email, service, mobile, message):
-    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    ip = request.headers.get('X-Forwarded-For', '').split(',')[0].strip() or request.remote_addr
     city, country = get_geo_info(ip)
     body = f"""
 📥 New Contact Form Submission:
@@ -80,7 +81,6 @@ City: {city}
 Country: {country}
 """
     msg = Message(subject="📨 New Contact Request",
-                  sender=app.config['MAIL_USERNAME'],
                   recipients=[app.config['MAIL_USERNAME']],
                   body=body)
     mail.send(msg)
@@ -96,11 +96,9 @@ I've received your message and will get back to you as soon as possible. In the 
 Have a great day ahead! 🌟
 
 Warm regards,
-Shivam Kumar
-(Developer & AI Enthusiast)
+Shubham Kumar
 """
     msg = Message(subject="Thanks for getting in touch!",
-                  sender=app.config['MAIL_USERNAME'],
                   recipients=[user_email],
                   body=body)
     mail.send(msg)
@@ -125,7 +123,6 @@ def send_daily_summary():
 Log in to your Google Sheets for details.
 """
         msg = Message(subject=f"📈 Daily Summary - {today}",
-                      sender=app.config['MAIL_USERNAME'],
                       recipients=[app.config['MAIL_USERNAME']],
                       body=body)
         mail.send(msg)
