@@ -1,49 +1,68 @@
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, session
 import os
 import csv
 from datetime import datetime
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 app = Flask(__name__,
     static_url_path='/static',
     static_folder='static',
     template_folder='templates')
 
-# Set a secret key for security
-app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'your-secret-key-here')
+# Set a secret key for session tracking
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'any-random-string')
 
-# 🔁 CSV log file for visit tracking
-VISIT_LOG_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'visit_logs.csv')
+# ---------- GOOGLE SHEETS SETUP ----------
+# Sheet IDs
+VISITOR_SHEET_ID = "1fJ_eypzPTvtMxZ_yM0R3yeYtEZ6i1YgDlG49s86mTKw"
+CONTACT_SHEET_ID = "1hLDSRhGJKja5Ogrk-rvUwVvE02tLsVmCNI2ZZkV-saI"
 
-# ✅ Function to log visit per day
-def log_visit():
+# Get Google Sheet
+def get_sheet(sheet_id):
+    scope = [
+        "https://spreadsheets.google.com/feeds",
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+    ]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+    client = gspread.authorize(creds)
+    return client.open_by_key(sheet_id).sheet1
+
+# Log daily visit to Google Sheet with session-based check
+def log_visit_to_sheet():
     today = datetime.now().strftime('%Y-%m-%d')
-    data = {}
+    if session.get('visited_today') == today:
+        return  # Already visited today
 
-    # Load existing data
-    if os.path.exists(VISIT_LOG_CSV):
-        with open(VISIT_LOG_CSV, 'r', encoding='utf-8') as f:
-            reader = csv.reader(f)
-            for row in reader:
-                if len(row) == 2:
-                    date, count = row
-                    data[date] = int(count)
+    session['visited_today'] = today
 
-    # Update today's count
-    if today in data:
-        data[today] += 1
-    else:
-        data[today] = 1
+    sheet = get_sheet(VISITOR_SHEET_ID)
+    records = sheet.get_all_records()
+    found = False
 
-    # Write updated data back
-    with open(VISIT_LOG_CSV, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f)
-        for date, count in sorted(data.items()):
-            writer.writerow([date, count])
+    for i, row in enumerate(records):
+        if row['Date'] == today:
+            count = int(row['Views']) + 1
+            sheet.update_cell(i + 2, 2, count)
+            found = True
+            break
 
-# ✅ Homepage — track views here
+    if not found:
+        sheet.append_row([today, 1])
+
+# Save contact to Google Sheet
+def save_contact_to_sheet(name, email, service, mobile, message):
+    sheet = get_sheet(CONTACT_SHEET_ID)
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    sheet.append_row([timestamp, name, email, service, mobile, message])
+
+# ---------- ROUTES ----------
+
 @app.route('/')
 def index():
-    log_visit()  # track view
+    log_visit_to_sheet()
     return render_template('index.html')
 
 @app.route('/projects')
@@ -57,23 +76,13 @@ def contact():
         email = request.form.get('email')
         service = request.form.get('service')
         message = request.form.get('message')
-        mobile_number = request.form.get('mobileNumber', '')  # Default to empty string
+        mobile_number = request.form.get('mobileNumber', '')
 
-        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        data = [timestamp, name, email, service, mobile_number, message]
-
-        csv_file = 'contacts.csv'
-        file_exists = os.path.isfile(csv_file)
-
-        with open(csv_file, mode='a', newline='', encoding='utf-8') as file:
-            writer = csv.writer(file)
-            if not file_exists:
-                writer.writerow(['Timestamp', 'Name', 'Email', 'Service', 'Mobile Number', 'Message'])
-            writer.writerow(data)
+        save_contact_to_sheet(name, email, service, mobile_number, message)
 
         return jsonify({
             'status': 'success',
-            'message': 'Form data received and saved to CSV.',
+            'message': 'Form data received and saved to Google Sheet.',
             'data': {
                 'name': name,
                 'email': email,
@@ -84,55 +93,13 @@ def contact():
         })
 
     except Exception as e:
-        print(f"Error saving to CSV: {str(e)}")
+        print(f"Error saving to Google Sheet: {str(e)}")
         return jsonify({
             'status': 'error',
             'message': f'Failed to save form data: {str(e)}'
         }), 500
 
-# ✅ Show contact submissions
-@app.route('/request-dikha')
-def request_dikha():
-    try:
-        with open("contacts.csv", "r", encoding="utf-8") as f:
-            rows = f.readlines()
-            rows = [row.strip().split(",") for row in rows]
-
-        html = "<h2>Contact Requests</h2><table border='1' cellpadding='5'>"
-        for i, row in enumerate(rows):
-            html += "<tr>"
-            for cell in row:
-                tag = "th" if i == 0 else "td"
-                html += f"<{tag}>{cell}</{tag}>"
-            html += "</tr>"
-        html += "</table>"
-        return html
-
-    except Exception as e:
-        return f"<h3>Error reading CSV file: {str(e)}</h3>"
-
-# ✅ New route to show total views
-@app.route('/total-view')
-def total_view():
-    try:
-        if not os.path.exists(VISIT_LOG_CSV):
-            return "<h3>No views recorded yet.</h3>"
-
-        with open(VISIT_LOG_CSV, 'r', encoding='utf-8') as f:
-            reader = csv.reader(f)
-            rows = list(reader)
-
-        html = "<h2>Daily View Count</h2><table border='1' cellpadding='5'><tr><th>Date</th><th>Views</th></tr>"
-        for row in rows:
-            if len(row) == 2:
-                html += f"<tr><td>{row[0]}</td><td>{row[1]}</td></tr>"
-        html += "</table>"
-        return html
-
-    except Exception as e:
-        return f"<h3>Error reading log: {str(e)}</h3>"
-
-# ✅ Flask run config
+# ---------- FLASK CONFIG ----------
 if __name__ == '__main__':
     host = os.environ.get('FLASK_HOST', '0.0.0.0')
     port = int(os.environ.get('FLASK_PORT', 5000))
