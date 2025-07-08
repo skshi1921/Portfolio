@@ -1727,6 +1727,10 @@ select.form-control {
     font-size: 16px;
     margin-top: 10px;
 }
+button.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
 /* All Projects Page */
 #all-projects {
