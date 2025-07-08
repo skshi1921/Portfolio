@@ -404,28 +404,32 @@ if (heroImage) {
     });
 }
 
-// Contact Form Submission
+// Contact Form Submission with Button Animation
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
+    const submitBtn = document.getElementById('submitButton');
+    const originalText = submitBtn.innerHTML;
+
     contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
         const formData = new FormData(contactForm);
-        
+
         fetch('/contact', {
             method: 'POST',
             body: formData
         })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            if (!response.ok) throw new Error('Network response was not ok');
             return response.json();
         })
         .then(data => {
             const successMessage = document.getElementById('successMessage');
             const successContent = successMessage.querySelector('.success-content');
-            
+
             if (data.status === 'success') {
                 successContent.innerHTML = `
                     <div class="success-icon">
@@ -465,9 +469,14 @@ if (contactForm) {
                 successMessage.style.animation = 'fadeOut 0.3s ease-in-out forwards';
                 setTimeout(() => successMessage.style.display = 'none', 300);
             }, 2000);
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
         });
     });
 }
+
 
 // Function to show error message (no longer needed, replaced by catch block)
 // Removed this function as it's now handled in the catch block above
