@@ -5,6 +5,7 @@ from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from flask_mail import Mail, Message
+import requests
 
 app = Flask(__name__,
     static_url_path='/static',
@@ -18,17 +19,15 @@ app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'any-random-string
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USER')  # e.g., skshivam771@gmail.com
-app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASS')  # e.g., App Password
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USER')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASS')
 
 mail = Mail(app)
 
 # ---------- GOOGLE SHEETS SETUP ----------
-# Sheet IDs
 VISITOR_SHEET_ID = "1fJ_eypzPTvtMxZ_yM0R3yeYtEZ6i1YgDlG49s86mTKw"
 CONTACT_SHEET_ID = "1hLDSRhGJKja5Ogrk-rvUwVvE02tLsVmCNI2ZZkV-saI"
 
-# Get Google Sheet
 def get_sheet(sheet_id):
     scope = [
         "https://spreadsheets.google.com/feeds",
@@ -40,35 +39,33 @@ def get_sheet(sheet_id):
     client = gspread.authorize(creds)
     return client.open_by_key(sheet_id).sheet1
 
-# Log daily visit to Google Sheet with session-based check
+# ---------- VISITOR TRACKING ----------
 def log_visit_to_sheet():
     today = datetime.now().strftime('%Y-%m-%d')
     if session.get('visited_today') == today:
-        return  # Already visited today
+        return
 
     session['visited_today'] = today
+    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    city, country = get_geo_info(ip)
 
     sheet = get_sheet(VISITOR_SHEET_ID)
-    records = sheet.get_all_records()
-    found = False
+    sheet.append_row([today, 1, ip, city, country])
 
-    for i, row in enumerate(records):
-        if row['Date'] == today:
-            count = int(row['Views']) + 1
-            sheet.update_cell(i + 2, 2, count)
-            found = True
-            break
+def get_geo_info(ip):
+    try:
+        res = requests.get(f"https://ipinfo.io/{ip}/json")
+        data = res.json()
+        return data.get("city", "-"), data.get("country", "-")
+    except:
+        return "-", "-"
 
-    if not found:
-        sheet.append_row([today, 1])
-
-# Save contact to Google Sheet
+# ---------- CONTACT MANAGEMENT ----------
 def save_contact_to_sheet(name, email, service, mobile, message):
     sheet = get_sheet(CONTACT_SHEET_ID)
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    sheet.append_row([timestamp, name, email, service, mobile, message])
+    sheet.append_row([timestamp, name, email, service, mobile, message, "Yes", timestamp])
 
-# Send email notification to admin
 def send_contact_email(name, email, service, mobile, message):
     body = f"""
 📥 New Contact Form Submission:
@@ -85,7 +82,6 @@ Message: {message}
                   body=body)
     mail.send(msg)
 
-# Send confirmation email to user
 def send_user_confirmation_email(user_email, user_name):
     body = f"""
 Hi {user_name},
@@ -97,16 +93,48 @@ I've received your message and will get back to you as soon as possible. In the 
 Have a great day ahead! 🌟
 
 Warm regards,
-Shubham
+Shivam Kumar
+(Developer & AI Enthusiast)
 """
-    msg = Message(subject="Thank you for contacting us!",
+    msg = Message(subject="Thanks for getting in touch!",
                   sender=app.config['MAIL_USERNAME'],
                   recipients=[user_email],
                   body=body)
     mail.send(msg)
 
-# ---------- ROUTES ----------
+# ---------- DAILY SUMMARY ----------
+@app.route('/send-daily-summary')
+def send_daily_summary():
+    try:
+        visitor_sheet = get_sheet(VISITOR_SHEET_ID)
+        contact_sheet = get_sheet(CONTACT_SHEET_ID)
+        today = datetime.now().strftime('%Y-%m-%d')
 
+        # Count today's visits
+        visit_count = sum(1 for row in visitor_sheet.get_all_values()[1:] if row[0] == today)
+
+        # Count today's contacts
+        contact_count = sum(1 for row in contact_sheet.get_all_values()[1:] if today in row[0])
+
+        body = f"""
+📊 Daily Summary - {today}
+
+👀 Visitors: {visit_count}
+📬 Contact Submissions: {contact_count}
+
+Log in to your Google Sheets for details.
+"""
+        msg = Message(subject=f"📈 Daily Summary - {today}",
+                      sender=app.config['MAIL_USERNAME'],
+                      recipients=[app.config['MAIL_USERNAME']],
+                      body=body)
+        mail.send(msg)
+        return "Summary email sent."
+
+    except Exception as e:
+        return f"Error sending summary: {str(e)}"
+
+# ---------- ROUTES ----------
 @app.route('/')
 def index():
     log_visit_to_sheet()
