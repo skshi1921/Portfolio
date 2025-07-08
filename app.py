@@ -48,7 +48,9 @@ def log_visit_to_sheet():
 
     session['visit_logged'] = today
     sheet = get_sheet(VISITOR_SHEET_ID)
-    all_rows = sheet.get_all_records()
+    rows = sheet.get_all_values()
+    headers = rows[0] if rows else []
+    all_rows = [dict(zip(headers, row)) for row in rows[1:] if len(row) == len(headers)]
 
     found = False
     for idx, row in enumerate(all_rows, start=2):
