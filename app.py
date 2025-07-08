@@ -46,11 +46,8 @@ def log_visit_to_sheet():
         return
 
     session['visited_today'] = today
-    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
-    city, country = get_geo_info(ip)
-
     sheet = get_sheet(VISITOR_SHEET_ID)
-    sheet.append_row([today, 1, ip, city, country])
+    sheet.append_row([today, 1])
 
 def get_geo_info(ip):
     try:
@@ -63,10 +60,14 @@ def get_geo_info(ip):
 # ---------- CONTACT MANAGEMENT ----------
 def save_contact_to_sheet(name, email, service, mobile, message):
     sheet = get_sheet(CONTACT_SHEET_ID)
+    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    city, country = get_geo_info(ip)
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    sheet.append_row([timestamp, name, email, service, mobile, message, "Yes", timestamp])
+    sheet.append_row([timestamp, name, email, service, mobile, message, ip, city, country, "Yes"])
 
 def send_contact_email(name, email, service, mobile, message):
+    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    city, country = get_geo_info(ip)
     body = f"""
 📥 New Contact Form Submission:
 
@@ -75,6 +76,8 @@ Email: {email}
 Mobile: {mobile}
 Service: {service}
 Message: {message}
+City: {city}
+Country: {country}
 """
     msg = Message(subject="📨 New Contact Request",
                   sender=app.config['MAIL_USERNAME'],
@@ -110,10 +113,7 @@ def send_daily_summary():
         contact_sheet = get_sheet(CONTACT_SHEET_ID)
         today = datetime.now().strftime('%Y-%m-%d')
 
-        # Count today's visits
         visit_count = sum(1 for row in visitor_sheet.get_all_values()[1:] if row[0] == today)
-
-        # Count today's contacts
         contact_count = sum(1 for row in contact_sheet.get_all_values()[1:] if today in row[0])
 
         body = f"""
