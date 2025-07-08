@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 import os
 import csv
 from datetime import datetime
@@ -68,6 +68,28 @@ def contact():
             'status': 'error',
             'message': f'Failed to save form data: {str(e)}'
         }), 500
+
+# 🔍 Route to view the contents of contacts.csv (for admin/debugging)
+@app.route('/request-dikha')
+def request_dikha():
+    try:
+        with open("contacts.csv", "r", encoding="utf-8") as f:
+            rows = f.readlines()
+            rows = [row.strip().split(",") for row in rows]
+
+        # Create HTML table
+        html = "<h2>Contact Requests</h2><table border='1' cellpadding='5'>"
+        for i, row in enumerate(rows):
+            html += "<tr>"
+            for cell in row:
+                tag = "th" if i == 0 else "td"
+                html += f"<{tag}>{cell}</{tag}>"
+            html += "</tr>"
+        html += "</table>"
+        return html
+
+    except Exception as e:
+        return f"<h3>Error reading CSV file: {str(e)}</h3>"
 
 if __name__ == '__main__':
     # Get host, port, and debug mode from environment variables
