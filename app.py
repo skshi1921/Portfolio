@@ -11,8 +11,39 @@ app = Flask(__name__,
 # Set a secret key for security
 app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'your-secret-key-here')
 
+# 🔁 CSV log file for visit tracking
+VISIT_LOG_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'visit_logs.csv')
+
+# ✅ Function to log visit per day
+def log_visit():
+    today = datetime.now().strftime('%Y-%m-%d')
+    data = {}
+
+    # Load existing data
+    if os.path.exists(VISIT_LOG_CSV):
+        with open(VISIT_LOG_CSV, 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                if len(row) == 2:
+                    date, count = row
+                    data[date] = int(count)
+
+    # Update today's count
+    if today in data:
+        data[today] += 1
+    else:
+        data[today] = 1
+
+    # Write updated data back
+    with open(VISIT_LOG_CSV, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        for date, count in sorted(data.items()):
+            writer.writerow([date, count])
+
+# ✅ Homepage — track views here
 @app.route('/')
 def index():
+    log_visit()  # track view
     return render_template('index.html')
 
 @app.route('/projects')
@@ -22,33 +53,24 @@ def projects():
 @app.route('/contact', methods=['POST'])
 def contact():
     try:
-        # Get form data
         name = request.form.get('name')
         email = request.form.get('email')
         service = request.form.get('service')
         message = request.form.get('message')
-        mobile_number = request.form.get('mobileNumber', '')  # Default to empty string if not provided
+        mobile_number = request.form.get('mobileNumber', '')  # Default to empty string
 
-        # Add timestamp
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-        # Prepare data for CSV
         data = [timestamp, name, email, service, mobile_number, message]
 
-        # Define CSV file path
         csv_file = 'contacts.csv'
-
-        # Check if CSV file exists, if not create it with headers
         file_exists = os.path.isfile(csv_file)
 
-        # Append data to CSV
         with open(csv_file, mode='a', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             if not file_exists:
                 writer.writerow(['Timestamp', 'Name', 'Email', 'Service', 'Mobile Number', 'Message'])
             writer.writerow(data)
 
-        # Return success response
         return jsonify({
             'status': 'success',
             'message': 'Form data received and saved to CSV.',
@@ -62,14 +84,13 @@ def contact():
         })
 
     except Exception as e:
-        # Log the error and return failure response
         print(f"Error saving to CSV: {str(e)}")
         return jsonify({
             'status': 'error',
             'message': f'Failed to save form data: {str(e)}'
         }), 500
 
-# 🔍 Route to view the contents of contacts.csv (for admin/debugging)
+# ✅ Show contact submissions
 @app.route('/request-dikha')
 def request_dikha():
     try:
@@ -77,7 +98,6 @@ def request_dikha():
             rows = f.readlines()
             rows = [row.strip().split(",") for row in rows]
 
-        # Create HTML table
         html = "<h2>Contact Requests</h2><table border='1' cellpadding='5'>"
         for i, row in enumerate(rows):
             html += "<tr>"
@@ -91,8 +111,29 @@ def request_dikha():
     except Exception as e:
         return f"<h3>Error reading CSV file: {str(e)}</h3>"
 
+# ✅ New route to show total views
+@app.route('/total-view')
+def total_view():
+    try:
+        if not os.path.exists(VISIT_LOG_CSV):
+            return "<h3>No views recorded yet.</h3>"
+
+        with open(VISIT_LOG_CSV, 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            rows = list(reader)
+
+        html = "<h2>Daily View Count</h2><table border='1' cellpadding='5'><tr><th>Date</th><th>Views</th></tr>"
+        for row in rows:
+            if len(row) == 2:
+                html += f"<tr><td>{row[0]}</td><td>{row[1]}</td></tr>"
+        html += "</table>"
+        return html
+
+    except Exception as e:
+        return f"<h3>Error reading log: {str(e)}</h3>"
+
+# ✅ Flask run config
 if __name__ == '__main__':
-    # Get host, port, and debug mode from environment variables
     host = os.environ.get('FLASK_HOST', '0.0.0.0')
     port = int(os.environ.get('FLASK_PORT', 5000))
     debug = os.environ.get('FLASK_DEBUG', 'True').lower() == 'true'
