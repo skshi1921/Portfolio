@@ -43,12 +43,23 @@ def get_sheet(sheet_id):
 # ---------- VISITOR TRACKING ----------
 def log_visit_to_sheet():
     today = datetime.now().strftime('%Y-%m-%d')
-    if session.get('visited_today') == today:
+    if session.get('visit_logged') == today:
         return
 
-    session['visited_today'] = today
+    session['visit_logged'] = today
     sheet = get_sheet(VISITOR_SHEET_ID)
-    sheet.append_row([today, 1])
+    all_rows = sheet.get_all_records()
+
+    found = False
+    for idx, row in enumerate(all_rows, start=2):
+        if row.get("Date") == today:
+            count = int(row.get("Views", 0)) + 1
+            sheet.update_cell(idx, 2, count)
+            found = True
+            break
+
+    if not found:
+        sheet.append_row([today, 1])
 
 def get_geo_info(ip):
     try:
