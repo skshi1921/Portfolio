@@ -4,6 +4,7 @@ import csv
 from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from flask_mail import Mail, Message
 
 app = Flask(__name__,
     static_url_path='/static',
@@ -12,6 +13,15 @@ app = Flask(__name__,
 
 # Set a secret key for session tracking
 app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'any-random-string')
+
+# ---------- EMAIL CONFIG ----------
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USER')  # e.g., skshivam771@gmail.com
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASS')  # e.g., App Password
+
+mail = Mail(app)
 
 # ---------- GOOGLE SHEETS SETUP ----------
 # Sheet IDs
@@ -58,6 +68,39 @@ def save_contact_to_sheet(name, email, service, mobile, message):
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     sheet.append_row([timestamp, name, email, service, mobile, message])
 
+# Send email notification to admin
+def send_contact_email(name, email, service, mobile, message):
+    body = f"""
+📥 New Contact Form Submission:
+
+Name: {name}
+Email: {email}
+Mobile: {mobile}
+Service: {service}
+Message: {message}
+"""
+    msg = Message(subject="📨 New Contact Request",
+                  sender=app.config['MAIL_USERNAME'],
+                  recipients=[app.config['MAIL_USERNAME']],
+                  body=body)
+    mail.send(msg)
+
+# Send confirmation email to user
+def send_user_confirmation_email(user_email, user_name):
+    body = f"""
+Hello {user_name},
+
+Thank you for contacting us. We have received your message and will get back to you soon.
+
+Best regards,
+Shivam (Portfolio Website)
+"""
+    msg = Message(subject="Thank you for contacting us!",
+                  sender=app.config['MAIL_USERNAME'],
+                  recipients=[user_email],
+                  body=body)
+    mail.send(msg)
+
 # ---------- ROUTES ----------
 
 @app.route('/')
@@ -79,10 +122,12 @@ def contact():
         mobile_number = request.form.get('mobileNumber', '')
 
         save_contact_to_sheet(name, email, service, mobile_number, message)
+        send_contact_email(name, email, service, mobile_number, message)
+        send_user_confirmation_email(email, name)
 
         return jsonify({
             'status': 'success',
-            'message': 'Form data received and saved to Google Sheet.',
+            'message': 'Form data saved and emails sent.',
             'data': {
                 'name': name,
                 'email': email,
@@ -93,10 +138,10 @@ def contact():
         })
 
     except Exception as e:
-        print(f"Error saving to Google Sheet: {str(e)}")
+        print(f"Error saving to Google Sheet or sending email: {str(e)}")
         return jsonify({
             'status': 'error',
-            'message': f'Failed to save form data: {str(e)}'
+            'message': f'Failed to save form data or send email: {str(e)}'
         }), 500
 
 # ---------- FLASK CONFIG ----------
