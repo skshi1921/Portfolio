@@ -2,6 +2,22 @@
 html {
     scroll-behavior: smooth;
 }
+html[data-theme="dark"] {
+  background-color: #0f0f1a !important;
+  color: #ffffff;
+}
+
+html[data-theme="light"] {
+  background-color: #ffffff !important;
+  color: #000000;
+}
+
+body {
+  background-color: inherit;
+  color: inherit;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 
 /* CSS Variables for Theme Colors */
 :root {
