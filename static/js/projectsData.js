@@ -16,7 +16,7 @@ const projectsData = [
         ],
         liveUrl: "https://breast-cancer-prediction-u9xj.onrender.com/", // Live URL available
         githubUrl: "https://github.com/ShubhamAIML/AI-ML-Internship-Task4",
-        featured: false
+        featured: true
     },
     {
         id: 2,
