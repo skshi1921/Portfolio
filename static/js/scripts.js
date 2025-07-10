@@ -198,7 +198,12 @@ function setupPageTransitions() {
         }
     });
 }
-
+// ✅ Force reload on back/forward navigation from bfcache
+window.onpageshow = function(event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+};
 // Make "Explore My Work" button behave like Projects nav link
 document.addEventListener('DOMContentLoaded', function() {
     // Set up page transitions
