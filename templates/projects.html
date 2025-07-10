@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Set initial background color based on saved theme -->
+    <script>
+    const theme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.backgroundColor = theme === 'dark' ? '#0f0f1a' : '#ffffff';
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        document.documentElement.style.backgroundColor = 
-            window.localStorage.getItem('theme') === 'light' ? '#ffffff' : '#0f0f1a';
-    </script>
+
     <title>All Projects - Shubham Kumar</title>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
