@@ -498,7 +498,7 @@ section:last-of-type {
 
 .hero-title {
     font-family: 'Montserrat', sans-serif;
-    font-size: 54px;
+    font-size: clamp(42px, 7vw, 54px);  /* 👈 Responsive size: mobile to desktop */
     font-weight: 900;
     line-height: 1.2;
     margin-bottom: 20px;
@@ -514,6 +514,7 @@ section:last-of-type {
     color: transparent;
     position: relative;
     display: inline-block;
+    font-size: clamp(35px, 7vw, 45px);
 }
 
 .hero-subtitle {
@@ -2004,11 +2005,6 @@ footer::before {
         width: 90%;
         max-width: 90%;
     }
-    
-    .hero-title {
-        font-size: 42px;
-    }
-    
     .hero-subtitle {
         font-size: 18px;
     }
@@ -2124,11 +2120,6 @@ footer::before {
     
     .hero-image {
         margin-top: 60px;
-    }
-    
-    .hero-title {
-        font-size: 32px;
-        margin-top: 20px;
     }
     
     .hero-subtitle {
