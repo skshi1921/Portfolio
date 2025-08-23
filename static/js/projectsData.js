@@ -14,8 +14,8 @@ const projectsData = [
             { icon: "fas fa-database", name: "Scikit-learn" },
             { icon: "fas fa-heartbeat", name: "Breast Cancer Prediction" }
         ],
-        liveUrl: "https://breast-cancer-prediction-u9xj.onrender.com/", // Live URL available
-        githubUrl: "https://github.com/ShubhamAIML/AI-ML-Internship-Task4",
+        liveUrl: "https://breast-cancer-prediction-with-logistic.onrender.com/", // Live URL available
+        githubUrl: "https://github.com/ShubhamAIML/Breast-Cancer-Prediction-with-Logistic-Regression",
         featured: true
     },
     {
@@ -30,7 +30,7 @@ const projectsData = [
             { icon: "fas fa-flask", name: "Flask" },
             { icon: "fas fa-laptop-medical", name: "Symptom Prediction" }
         ],
-        liveUrl: "https://ai-symptom-checker-j93h.onrender.com/",
+        liveUrl: "https://ai-symptom-checker-mji4.onrender.com/",
         githubUrl: "https://github.com/ShubhamAIML/AI-Symptom-Checker",
         featured: true
     },
@@ -46,8 +46,8 @@ const projectsData = [
             { icon: "fas fa-flask", name: "Flask" },
             { icon: "fas fa-notes-medical", name: "Health Analytics" }
         ],
-        liveUrl: "https://heart-disease-prediction-e8pu.onrender.com/", // Live URL available
-        githubUrl: "https://github.com/ShubhamAIML/AI-ML-Internship-Task5",
+        liveUrl: "https://heart-disease-prediction-ujuq.onrender.com/", // Live URL available
+        githubUrl: "https://github.com/ShubhamAIML/Heart-Disease-Prediction",
         featured: true
     },
     {
@@ -68,18 +68,18 @@ const projectsData = [
     },
     {
         id: 5,
-        title: "Facial Recognition System",
-        description: "Developed a facial recognition system using deep learning for secure access control with emotion detection capabilities.",
-        image: "../static/images/projects/Temp.webp",
-        categories: ["computer-vision", "deep-learning"],
+        title: "AI Resume Grader",
+        description: "An AI-based tool that evaluates resumes, scores them for ATS compatibility, and suggests improvements.",
+        image: "../static/images/projects/project5.webp",
+        categories: ["Web-Apps", "Machine-Learning"],
         tags: [
-            { icon: "fas fa-eye", name: "Computer Vision" },
-            { icon: "fas fa-user", name: "Face Recognition" },
-            { icon: "fas fa-brain", name: "CNN" }
+            { icon: "fas fa-robot", name: "AI" },
+            { icon: "fas fa-file-alt", name: "Resume Analysis" },
+            { icon: "fas fa-language", name: "NLP" }
         ],
-        liveUrl: "", // No live URL
-        githubUrl: "", // No GitHub URL
-        featured: false
+        liveUrl: "https://ai-resume-grader-3upq.onrender.com/", // No live URL
+        githubUrl: "https://github.com/ShubhamAIML/AI-Resume-Grader", // No GitHub URL
+        featured: true
     },
     {
         id: 6,
@@ -179,3 +179,4 @@ function createProjectCard(project) {
     </div>
     `;
 }
+
