@@ -5,7 +5,7 @@ const projectsData = [
         id: 1,
         title: "Bihar Voter Search Booth",
         description: "A web-based application designed to help voters easily find their voting details for the Bihar Legislative Assembly Elections 2025. This system provides a user-friendly interface for searching voter information using multiple search methods.",
-        image: "../static/images/projects/project8.webp",
+        image: "../static/images/projects/Project8.webp",
         categories: ["web-app"],
         tags: [
             { icon: "fab fa-python", name: "Python" },
@@ -196,5 +196,6 @@ function createProjectCard(project) {
     </div>
     `;
 }
+
 
 
