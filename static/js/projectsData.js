@@ -6,7 +6,7 @@ const projectsData = [
         title: "WriteFusion AI",
         description: "WriteFusion AI is a Flask + TensorFlow language-model web app for next-word prediction, story continuation, paragraph generation, attention inspection, and model diagnostics. It serves a locally trained Keras Transformer model through a polished browser UI.",
         image: "../static/images/projects/Project10.webp",
-        categories: ["web-app"],
+        categories: ["machine-learning", "web-app", "Deep-Learning", "NLP"],
         tags: [
             { icon: "fab fa-python", name: "Python" },
             { icon: "fas fa-flask", name: "Flask" },
@@ -17,41 +17,41 @@ const projectsData = [
         featured: true
     },
     {
-        id: 1,
-        title: "Bihar Voter Search Booth",
-        description: "A web-based application designed to help voters easily find their voting details for the Bihar Legislative Assembly Elections 2025. This system provides a user-friendly interface for searching voter information using multiple search methods.",
-        image: "../static/images/projects/Project8.webp",
-        categories: ["web-app"],
-        tags: [
-            { icon: "fab fa-python", name: "Python" },
-            { icon: "fas fa-flask", name: "Flask" },
-            { icon: "fa-solid fa-person-booth", name: "ECI" },
-            { icon: "fa-solid fa-circle-info", name: "Voter Details" },
-            { icon: "fa-solid fa-users", name: "Democracy" }
-        ],
-        liveUrl: "https://bihar-voter-search-booth.onrender.com/", // Live URL available
-        githubUrl: "https://github.com/ShubhamAIML/bihar-voter-search-booth",
-        featured: true
-    },
-    {
-        id: 1,
-        title: "Bihar Voter Search Booth",
-        description: "A web-based application designed to help voters easily find their voting details for the Bihar Legislative Assembly Elections 2025. This system provides a user-friendly interface for searching voter information using multiple search methods.",
-        image: "../static/images/projects/Project8.webp",
-        categories: ["web-app"],
-        tags: [
-            { icon: "fab fa-python", name: "Python" },
-            { icon: "fas fa-flask", name: "Flask" },
-            { icon: "fa-solid fa-person-booth", name: "ECI" },
-            { icon: "fa-solid fa-circle-info", name: "Voter Details" },
-            { icon: "fa-solid fa-users", name: "Democracy" }
-        ],
-        liveUrl: "https://bihar-voter-search-booth.onrender.com/", // Live URL available
-        githubUrl: "https://github.com/ShubhamAIML/bihar-voter-search-booth",
-        featured: true
-    },
-    {
         id: 2,
+        title: "MindScan",
+        description: "A web-based application designed to help voters easily find their voting details for the Bihar Legislative Assembly Elections 2025. This system provides a user-friendly interface for searching voter information using multiple search methods.",
+        image: "../static/images/projects/Project8.webp",
+        categories: ["web-app"],
+        tags: [
+            { icon: "fab fa-python", name: "Python" },
+            { icon: "fas fa-flask", name: "Flask" },
+            { icon: "fa-solid fa-person-booth", name: "ECI" },
+            { icon: "fa-solid fa-circle-info", name: "Voter Details" },
+            { icon: "fa-solid fa-users", name: "Democracy" }
+        ],
+        liveUrl: "https://bihar-voter-search-booth.onrender.com/", // Live URL available
+        githubUrl: "https://github.com/ShubhamAIML/bihar-voter-search-booth",
+        featured: true
+    },
+    {
+        id: 3,
+        title: "Bihar Voter Search Booth",
+        description: "A web-based application designed to help voters easily find their voting details for the Bihar Legislative Assembly Elections 2025. This system provides a user-friendly interface for searching voter information using multiple search methods.",
+        image: "../static/images/projects/Project8.webp",
+        categories: ["web-app"],
+        tags: [
+            { icon: "fab fa-python", name: "Python" },
+            { icon: "fas fa-flask", name: "Flask" },
+            { icon: "fa-solid fa-person-booth", name: "ECI" },
+            { icon: "fa-solid fa-circle-info", name: "Voter Details" },
+            { icon: "fa-solid fa-users", name: "Democracy" }
+        ],
+        liveUrl: "https://bihar-voter-search-booth.onrender.com/", // Live URL available
+        githubUrl: "https://github.com/ShubhamAIML/bihar-voter-search-booth",
+        featured: true
+    },
+    {
+        id: 4,
         title: "Breast Cancer Prediction",
         description: "A Flask-based web application for predicting breast cancer (benign or malignant) using a trained machine learning model. Users input clinical features (e.g., clump thickness, cell size) through a responsive HTML interface. The model, trained on the Wisconsin Breast Cancer Dataset using scikit-learn Logistic Regression, delivers accurate real-time predictions.",
         image: "../static/images/projects/project1.webp",
@@ -68,7 +68,7 @@ const projectsData = [
         featured: true
     },
     {
-        id: 3,
+        id: 5,
         title: "AI Symptom Checker",
         description: "Developed a machine learning-based web application that predicts possible diseases based on user-input symptoms. Utilized classification algorithms to provide fast and accurate predictions.",
         image: "../static/images/projects/project2.webp",
@@ -84,7 +84,7 @@ const projectsData = [
         featured: true
     },
     {
-        id: 4,
+        id: 6,
         title: "Heart Disease Prediction",
         description: "A Flask-based machine learning web application that predicts the risk of heart disease using clinical parameters such as age, blood pressure, cholesterol levels, and more. Aims to support early diagnosis and medical awareness.",
         image: "../static/images/projects/project3.webp",
@@ -100,7 +100,7 @@ const projectsData = [
         featured: true
     },
     {
-        id: 5,
+        id: 7,
         title: "Learning Portal",
         description: "A Flask-powered educational web platform designed to host and deliver interactive learning content such as tutorials and notes. It supports personalized learning paths and user progress tracking.",
         image: "../static/images/projects/project4.webp",
@@ -116,7 +116,7 @@ const projectsData = [
         featured: true
     },
     {
-        id: 6,
+        id: 8,
         title: "AI Resume Grader",
         description: "An AI-based tool that evaluates resumes, scores them for ATS compatibility, and suggests improvements.",
         image: "../static/images/projects/project5.webp",
@@ -131,7 +131,7 @@ const projectsData = [
         featured: true
     },
     {
-        id: 7,
+        id: 9,
         title: "Recommendation Engine",
         description: "Built a content-based and collaborative filtering recommendation engine for a streaming platform to enhance user experience.",
         image: "../static/images/projects/Temp.webp",
@@ -146,7 +146,7 @@ const projectsData = [
         featured: false
     },
     {
-        id: 8,
+        id: 10,
         title: "Fast2Apply",
         description: "An informational website built using WordPress that helps users easily discover and understand various government schemes. It offers simplified scheme details, eligibility guidelines, and step-by-step application processes.",
         image: "../static/images/projects/Project7.webp",
@@ -163,7 +163,7 @@ const projectsData = [
         featured: false
     },
     {
-        id: 9,
+        id: 11,
         title: "Image Classification App",
         description: "Developed a web application that uses deep learning to classify images into various categories with high accuracy and minimal latency.",
         image: "../static/images/projects/Temp.webp",
@@ -178,7 +178,7 @@ const projectsData = [
         featured: false
     },
     {
-        id: 10,
+        id: 12,
         title: "Fraud Detection System",
         description: "Implemented a real-time fraud detection system for financial transactions using anomaly detection and ensemble learning techniques.",
         image: "../static/images/projects/Temp.webp",
