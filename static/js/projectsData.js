@@ -3,6 +3,38 @@
 const projectsData = [
     {
         id: 1,
+        title: "WriteFusion AI",
+        description: "WriteFusion AI is a Flask + TensorFlow language-model web app for next-word prediction, story continuation, paragraph generation, attention inspection, and model diagnostics. It serves a locally trained Keras Transformer model through a polished browser UI.",
+        image: "../static/images/projects/Project10.webp",
+        categories: ["web-app"],
+        tags: [
+            { icon: "fab fa-python", name: "Python" },
+            { icon: "fas fa-flask", name: "Flask" },
+            { icon: "fas fa-chart-bar", name: "Machine Learning" },
+        ],
+        liveUrl: "https://writefusion-ai-1.onrender.com/", // Live URL available
+        githubUrl: "https://github.com/ShubhamAIML/WriteFusion-AI",
+        featured: true
+    },
+    {
+        id: 1,
+        title: "Bihar Voter Search Booth",
+        description: "A web-based application designed to help voters easily find their voting details for the Bihar Legislative Assembly Elections 2025. This system provides a user-friendly interface for searching voter information using multiple search methods.",
+        image: "../static/images/projects/Project8.webp",
+        categories: ["web-app"],
+        tags: [
+            { icon: "fab fa-python", name: "Python" },
+            { icon: "fas fa-flask", name: "Flask" },
+            { icon: "fa-solid fa-person-booth", name: "ECI" },
+            { icon: "fa-solid fa-circle-info", name: "Voter Details" },
+            { icon: "fa-solid fa-users", name: "Democracy" }
+        ],
+        liveUrl: "https://bihar-voter-search-booth.onrender.com/", // Live URL available
+        githubUrl: "https://github.com/ShubhamAIML/bihar-voter-search-booth",
+        featured: true
+    },
+    {
+        id: 1,
         title: "Bihar Voter Search Booth",
         description: "A web-based application designed to help voters easily find their voting details for the Bihar Legislative Assembly Elections 2025. This system provides a user-friendly interface for searching voter information using multiple search methods.",
         image: "../static/images/projects/Project8.webp",
@@ -47,7 +79,7 @@ const projectsData = [
             { icon: "fas fa-flask", name: "Flask" },
             { icon: "fas fa-laptop-medical", name: "Symptom Prediction" }
         ],
-        liveUrl: "https://ai-symptom-checker-mji4.onrender.com/",
+        liveUrl: "https://ai-symptom-checker-dlup.onrender.com/",
         githubUrl: "https://github.com/ShubhamAIML/AI-Symptom-Checker",
         featured: true
     },
