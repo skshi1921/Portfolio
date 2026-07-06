@@ -19,18 +19,16 @@ const projectsData = [
     {
         id: 2,
         title: "MindScan",
-        description: "A web-based application designed to help voters easily find their voting details for the Bihar Legislative Assembly Elections 2025. This system provides a user-friendly interface for searching voter information using multiple search methods.",
-        image: "../static/images/projects/Project8.webp",
-        categories: ["web-app"],
+        description: "Predicting teen depression risk using XGBoost and SMOTE-balanced data. Django web app with real-time predictions, personalized recommendations, and responsive design.",
+        image: "../static/images/projects/Project11.webp",
+        categories: ["machine-learning", "web-app"],
         tags: [
             { icon: "fab fa-python", name: "Python" },
             { icon: "fas fa-flask", name: "Flask" },
-            { icon: "fa-solid fa-person-booth", name: "ECI" },
-            { icon: "fa-solid fa-circle-info", name: "Voter Details" },
-            { icon: "fa-solid fa-users", name: "Democracy" }
+            { icon: "fas fa-database", name: "Scikit-learn" },
         ],
-        liveUrl: "https://bihar-voter-search-booth.onrender.com/", // Live URL available
-        githubUrl: "https://github.com/ShubhamAIML/bihar-voter-search-booth",
+        liveUrl: "https://mindsacn-g7s6.onrender.com/", // Live URL available
+        githubUrl: "https://github.com/ShubhamAIML/MindSacn",
         featured: true
     },
     {
