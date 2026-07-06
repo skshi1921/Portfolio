@@ -4,7 +4,7 @@ const projectsData = [
     {
         id: 1,
         title: "WriteFusion AI",
-        description: "WriteFusion AI is a Flask + TensorFlow language-model web app for next-word prediction, story continuation, paragraph generation, attention inspection, and model diagnostics. It serves a locally trained Keras Transformer model through a polished browser UI.",
+        description: "WriteFusion AI is a Flask + TensorFlow language-model web app for next-word prediction, story continuation, paragraph generation and attention inspection. It serves a locally trained Keras Transformer model through a polished browser UI.",
         image: "../static/images/projects/Project10.webp",
         categories: ["machine-learning", "web-app", "Deep-Learning", "NLP"],
         tags: [
