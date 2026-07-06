@@ -1,12 +1,12 @@
 // Project data that will be used by both index.html and projects.html
-// Categories are Machine-Learning , Deep-Learning , NLP , Computer-Vision , Web-Apps
+// Categories are machine-learning , deep-learning , nlp , computer-vision , web-apps
 const projectsData = [
     {
         id: 1,
         title: "WriteFusion AI",
         description: "WriteFusion AI is a Flask + TensorFlow language-model web app for next-word prediction, story continuation, paragraph generation and attention inspection. It serves a locally trained Keras Transformer model through a polished browser UI.",
         image: "../static/images/projects/Project10.webp",
-        categories: ["machine-learning", "web-app", "Deep-Learning", "NLP"],
+        categories: ["machine-learning", "web-app", "deep-learning", "nlp"],
         tags: [
             { icon: "fab fa-python", name: "Python" },
             { icon: "fas fa-flask", name: "Flask" },
