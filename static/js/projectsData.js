@@ -27,7 +27,7 @@ const projectsData = [
             { icon: "fas fa-flask", name: "Flask" },
             { icon: "fas fa-database", name: "Scikit-learn" },
         ],
-        liveUrl: "https://mindsacn-g7s6.onrender.com/", // Live URL available
+        liveUrl: "https://mindscan-lkpf.onrender.com", // Live URL available
         githubUrl: "https://github.com/ShubhamAIML/MindSacn",
         featured: true
     },
